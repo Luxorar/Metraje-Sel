@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metraje Sel</title>
+  <script src="script.js" defer></script>
+</head>
+  Selector de Serie o Película para ver
+<body>
+  <form action="" class="metraje" method="POST" id="form-metraje">
+
+    <label for="nombre">Nombre</label>
+    <input type="text" class="nombre" id="nombre" placeholder="Bullet Train" required>
+
+    <label for="tipo">Tipo</label>
+    <select name="tipo" id="tipo" class="tipo" required>
+      <option value="" disabled selected>Seleccion un tipo de metraje...</option>
+      <option value="Pelicula">Pelicula</option>
+      <option value="Serie">Serie</option>
+    </select>
+
+    <button type="submit" class="guardar">Guardar</button>
+  </form>
+
+  <ul class="lista-pelis" id="lista-pelis"></ul>
+</body>
+</html>
