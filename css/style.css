@@ -1,0 +1,23 @@
+:root{
+
+    --color-fondo: #3e8baf;
+    --fondo-2: #576369;
+    --fondo3: #494a7a;
+
+    --letra1: rgb(28, 41, 58);
+    --letra2: #1a4cb8;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body{
+    background-color: var(--color-fondo);
+    text-align: center; 
+}
+
