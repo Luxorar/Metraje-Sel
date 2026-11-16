@@ -1,23 +1,238 @@
-:root{
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap');
 
-    --color-fondo: #3e8baf;
-    --fondo-2: #576369;
-    --fondo3: #494a7a;
+/* ---------- Variables ---------- */
+:root {
+  --fondo: #1c2236;
+  --fondo-suave: #262e47;
+  --papel: #f4ecdb;
+  --tinta: #1c2236;
+  --tinta-suave: #5b5f70;
+  --acento: #d9432f;
+  --acento-oscuro: #b5321f;
+  --linea: #c9bfa6;
 
-    --letra1: rgb(28, 41, 58);
-    --letra2: #1a4cb8;
-
+  --fuente-titulo: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --fuente-texto: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
-* {
-  margin: 0;
-  padding: 0;
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 3rem 1.25rem 4rem;
+  background: var(--fondo);
+  color: var(--papel);
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Todo el contenido en una sola columna centrada */
+h3,
+.metraje,
+.lista-pelis {
+  width: 100%;
+  max-width: 34rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1.75rem, 5vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Formulario ---------- */
+.metraje {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.5rem;
+  background: var(--papel);
+  color: var(--tinta);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.35);
+}
+
+.metraje label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.metraje label:not(:first-child) {
+  margin-top: 0.75rem;
+}
+
+.metraje input,
+.metraje select {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  font: inherit;
+  color: var(--tinta);
+  background: #fffaf0;
+  border: 2px solid var(--linea);
+  border-radius: 0.35rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.metraje input::placeholder {
+  color: var(--tinta-suave);
+  opacity: 0.8;
+}
+
+.metraje input:focus-visible,
+.metraje select:focus-visible {
   outline: none;
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px rgba(217, 67, 47, 0.25);
 }
 
-body{
-    background-color: var(--color-fondo);
-    text-align: center; 
+/*ventana emergente*/
+/* 1. Estilos base (mientras está cerrado) */
+.escogido {
+  font-size: 20px;
+  border: none;
+  padding: 1rem;
+  background: var(--papel);
+  color: var(--tinta);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.35);
+  user-select: none; /* Evita que se seleccione el texto azul al arrastrar */
 }
 
+/* 2. Activa Flexbox y el gap SOLO cuando el modal se abre */
+.escogido[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem; 
+}
+
+.escogido button{
+  margin-top: 1.25rem;
+  padding: 0.2rem 0.5rem;
+  font: inherit;
+  font-weight: 100;
+  font-size: 17px;
+  color: #fff;
+  background: var(--acento);
+  border: 0;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.botones {
+  display: flex;
+  justify-content: center; /* Centra los botones horizontalmente */
+  gap: 1rem;               /* Opcional: agrega separación entre los botones */
+}
+.botones button{
+  margin-top: 1.25rem;
+  padding: 0.8rem 1.25rem;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: var(--acento);
+  border: 0;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.guardar:hover, .escoger:hover, .escogido button:hover {
+  background: var(--acento-oscuro);
+}
+
+.guardar:active, .escoger:active {
+  transform: translateY(1px);
+}
+
+.guardar:focus-visible, .escoger:focus-visible {
+  outline: 3px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+/* ---------- Lista (cada item es una entrada de cine) ---------- */
+.lista-pelis {
+  margin-top: 2rem;
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lista-pelis li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  color: var(--tinta);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  border-radius: 0.35rem;
+  /* Muescas laterales de la entrada */
+  background:
+    radial-gradient(circle at 0 50%, var(--fondo) 0 0.6rem, transparent 0.65rem) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 50%, var(--fondo) 0 0.6rem, transparent 0.65rem) right / 51% 100% no-repeat,
+    var(--papel);
+}
+
+/* Botón eliminar: queda a la derecha, separado por línea punteada */
+.lista-pelis li button {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 0.35rem 0 0.35rem 1rem;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--acento-oscuro);
+  background: none;
+  border: 0;
+  border-left: 2px dashed var(--linea);
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.lista-pelis li button:hover {
+  text-decoration: underline;
+}
+
+.lista-pelis li button:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 3px;
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 480px) {
+  body {
+    padding: 2rem 1rem 3rem;
+  }
+
+  .metraje {
+    padding: 1.15rem;
+  }
+
+  .lista-pelis li {
+    padding: 0.9rem 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

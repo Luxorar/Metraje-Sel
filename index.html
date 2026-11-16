@@ -9,6 +9,13 @@
 </head>
 
 <body>
+  <!-- Modal con un párrafo para el resultado y un botón para cerrar -->
+  <dialog class="escogido" id="modal-resultado">
+    <p id="texto-escogido"></p>
+    <button type="button" id="aceptar-modal">Aceptar</button>
+    <button type="button" id="cerrar-modal">Cerrar</button>
+  </dialog>
+
   <h3>Selector de Serie o Película para ver</h3>
   <form action="" class="metraje" method="POST" id="form-metraje">
 
@@ -17,12 +24,16 @@
 
     <label for="tipo">Tipo</label>
     <select name="tipo" id="tipo" class="tipo" required>
-      <option value="" disabled selected>Seleccion un tipo de metraje...</option>
+      <option value="" disabled selected>Selecciona un tipo de metraje...</option>
       <option value="Pelicula">Pelicula</option>
       <option value="Serie">Serie</option>
     </select>
 
-    <button type="submit" class="guardar">Guardar</button>
+    <div class="botones">
+      <button type="submit" class="guardar">Guardar</button>
+      <button type="button" class="escoger">Escoger al azar</button>
+    </div>
+    
   </form>
 
   <ul class="lista-pelis" id="lista-pelis"></ul>
