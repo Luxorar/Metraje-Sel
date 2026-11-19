@@ -11,7 +11,7 @@ export default function FormularioMetraje({ onGuardar, onEscoger }) {
     const tipoLimpio = tipo.trim()
     if (!nombreLimpio || !tipoLimpio) return
 
-    onGuardar({ nombre: nombreLimpio, tipo: tipoLimpio })
+    onGuardar({ nombre, tipo });    
     setNombre('')
     setTipo('')
   }

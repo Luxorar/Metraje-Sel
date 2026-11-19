@@ -16,13 +16,13 @@ function App() {
     }
 
     const indiceAleatorio = Math.floor(Math.random() * metrajes.length)
-    setSeleccion({ ...metrajes[indiceAleatorio], indice: indiceAleatorio })
+    setSeleccion( metrajes[indiceAleatorio])
   }
 
   const aceptarSeleccion = () => {
     if (!seleccion) return
 
-    eliminar(seleccion.indice)
+    eliminar(seleccion._id)
     setSeleccion(null)
   }
 

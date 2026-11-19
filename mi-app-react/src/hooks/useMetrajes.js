@@ -1,33 +1,31 @@
-import { useCallback, useEffect, useState } from 'react'
-
-const CLAVE = 'metrajes'
-
-function cargarMetrajes() {
-  try {
-    const guardados = localStorage.getItem(CLAVE)
-    if (!guardados) return []
-
-    const parseados = JSON.parse(guardados)
-    return Array.isArray(parseados) ? parseados : []
-  } catch {
-    return []
-  }
-}
+import { useEffect, useState } from 'react';
 
 export function useMetrajes() {
-  const [metrajes, setMetrajes] = useState(cargarMetrajes)
+  const [metrajes, setMetrajes] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem(CLAVE, JSON.stringify(metrajes))
-  }, [metrajes])
+    fetch('/api/metrajes').then(r => r.json()).then(setMetrajes).catch(console.error);
+  }, []);
 
-  const agregar = useCallback((item) => {
-    setMetrajes((actuales) => [...actuales, item])
-  }, [])
+  const agregar = async (item) => {
+    console.log('Enviando:', item);
+    const r = await fetch('/api/metrajes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(item),
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      console.error('Error de la API:', data.error);
+      return;
+    }
+    setMetrajes((prev) => [...prev, data]);
+  };
 
-  const eliminar = useCallback((indice) => {
-    setMetrajes((actuales) => actuales.filter((_, posicion) => posicion !== indice))
-  }, [])
+  const eliminar = async (id) => {
+    await fetch(`/api/metrajes/${id}`, { method: 'DELETE' });
+    setMetrajes(prev => prev.filter(m => m._id !== id));
+  };
 
-  return { metrajes, agregar, eliminar }
+  return { metrajes, agregar, eliminar };
 }
