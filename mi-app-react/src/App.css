@@ -53,6 +53,39 @@ h3 {
   letter-spacing: 0.01em;
 }
 
+/* ---------- Estado de sincronización ---------- */
+.estado-sync {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 34rem;
+  margin: -0.75rem auto 1.5rem;
+  font-size: 0.85rem;
+  color: var(--papel);
+  opacity: 0.75;
+}
+
+.estado-sync--error {
+  opacity: 1;
+  color: #ffb3a7;
+}
+
+.reintentar {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.reintentar:hover {
+  color: #fff;
+}
+
 /* ---------- Formulario ---------- */
 .metraje {
   display: flex;

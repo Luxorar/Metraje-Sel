@@ -6,7 +6,7 @@ import { useMetrajes } from './hooks/useMetrajes'
 import './App.css'
 
 function App() {
-  const { metrajes, agregar, eliminar } = useMetrajes()
+  const { metrajes, agregar, eliminar, estado, recargar } = useMetrajes()
   const [seleccion, setSeleccion] = useState(null)
 
   const escogerAlAzar = () => {
@@ -29,6 +29,17 @@ function App() {
   return (
     <main>
       <h3>Selector de Serie o Película para ver</h3>
+
+      <p className={`estado-sync estado-sync--${estado}`} role="status" aria-live="polite">
+        {estado === 'cargando' && 'Cargando…'}
+        {estado === 'ok' && 'Actualizado'}
+        {estado === 'error' && (
+          <>
+            ⚠ Sin conexión, reintentando…
+            <button type="button" className="reintentar" onClick={recargar}>Reintentar</button>
+          </>
+        )}
+      </p>
 
       <FormularioMetraje onGuardar={agregar} onEscoger={escogerAlAzar} />
 
